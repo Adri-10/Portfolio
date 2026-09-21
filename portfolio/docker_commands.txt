@@ -1,0 +1,10 @@
+# Step 1: Build the Docker image
+# This command reads your Dockerfile and builds an image named "portfolio-app"
+docker build -t portfolio-app .
+
+# Step 2: Run the Docker container
+# This command runs the "portfolio-app" image and maps your computer's port 3000 to the container's port 3000
+docker run -p 3000:3000 portfolio-app
+
+# Optional: Run the container in the background (detached mode)
+docker run -d -p 3000:3000 portfolio-app
