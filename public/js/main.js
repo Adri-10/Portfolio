@@ -625,7 +625,52 @@ document.addEventListener('DOMContentLoaded', () => {
   document.head.appendChild(style);
 
   // ============================================
-  // 19. PRELOADER (graceful entry)
+  // 19. RESUME MODAL
+  // ============================================
+  const resumeModal = document.getElementById('resumeModal');
+  const resumeFullscreenBtn = document.getElementById('resumeFullscreen');
+  const resumeModalClose = document.getElementById('resumeModalClose');
+  const resumeModalBackdrop = document.getElementById('resumeModalBackdrop');
+  const resumeOverlay = document.getElementById('resumeOverlay');
+
+  function openResumeModal() {
+    if (resumeModal) {
+      resumeModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeResumeModal() {
+    if (resumeModal) {
+      resumeModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (resumeFullscreenBtn) {
+    resumeFullscreenBtn.addEventListener('click', openResumeModal);
+  }
+
+  if (resumeOverlay) {
+    resumeOverlay.addEventListener('click', openResumeModal);
+  }
+
+  if (resumeModalClose) {
+    resumeModalClose.addEventListener('click', closeResumeModal);
+  }
+
+  if (resumeModalBackdrop) {
+    resumeModalBackdrop.addEventListener('click', closeResumeModal);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && resumeModal && resumeModal.classList.contains('active')) {
+      closeResumeModal();
+    }
+  });
+
+  // ============================================
+  // 20. PRELOADER (graceful entry)
   // ============================================
   window.addEventListener('load', () => {
     document.body.style.opacity = '0';
@@ -636,7 +681,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================
-  // 20. KEYBOARD NAVIGATION ACCESSIBILITY
+  // 21. KEYBOARD NAVIGATION ACCESSIBILITY
   // ============================================
   document.addEventListener('keydown', (e) => {
     // Show cursor for keyboard users
